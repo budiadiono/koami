@@ -1,3 +1,4 @@
+import 'koa-body'
 import { RouterContext } from 'koa-router'
 import { IParamMeta } from '../types'
 
