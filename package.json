@@ -1,0 +1,30 @@
+{
+  "name": "koami",
+  "version": "0.0.1",
+  "description": "Create typescript Koa class based controllers with decorators",
+  "keywords": [
+    "koa",
+    "controller",
+    "typescript"
+  ],
+  "author": "budiadiono <budiadiono@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/koa-compose": "^3.2.4",
+    "@types/koa-router": "^7.0.41",
+    "@types/lodash": "^4.14.135",
+    "koa-compose": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "lodash": "^4.17.11",
+    "tslint": "^5.18.0",
+    "typedi": "^0.8.0",
+    "typescript": "^3.5.2"
+  }
+}
