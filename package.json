@@ -19,6 +19,9 @@
   "files": [
     "dist"
   ],
+  "dependencies": {
+    "lodash": "^4.17.11"
+  },
   "devDependencies": {
     "@hapi/boom": "^7.4.2",
     "@types/hapi__boom": "^7.4.0",
@@ -28,7 +31,6 @@
     "koa-body": "^4.1.0",
     "koa-compose": "^4.1.0",
     "koa-router": "^7.4.0",
-    "lodash": "^4.17.11",
     "tslint": "^5.18.0",
     "typedi": "^0.8.0",
     "typescript": "^3.5.2"
