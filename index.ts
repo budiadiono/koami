@@ -9,6 +9,7 @@ export * from './src/decorators/controller'
 export * from './src/decorators/param'
 export * from './src/decorators/user'
 export * from './src/decorators/authorized'
+export * from './src/decorators/query-object'
 
 export function routing(
   config: RouterConfig,

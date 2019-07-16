@@ -48,6 +48,7 @@ export class ActionMeta {
       const params: IParamMeta[] = _([
         ...meta.bodyParameters.filter(b => b.method === this.method),
         ...meta.urlParameters.filter(b => b.method === this.method),
+        ...meta.queryObjectParameters.filter(b => b.method === this.method),
         ...meta.userParameters.filter(b => b.method === this.method)
       ])
         .sortBy(p => p.index)

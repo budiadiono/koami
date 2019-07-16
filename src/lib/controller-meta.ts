@@ -6,6 +6,7 @@ import { ActionMeta } from './action-meta'
 import { AuthorizedMeta } from './authorized-meta'
 import { BodyMeta } from './body-meta'
 import { ParamMeta } from './param-meta'
+import { QueryObjectMeta } from './query-object-meta'
 import { UserMeta } from './user-meta'
 
 export class ControllerMeta {
@@ -31,6 +32,11 @@ export class ControllerMeta {
    * User parameters
    */
   userParameters: UserMeta[] = []
+
+  /**
+   * Query parameters as object
+   */
+  queryObjectParameters: QueryObjectMeta[] = []
 
   /**
    * Controller authorization
