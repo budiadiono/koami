@@ -31,8 +31,8 @@
     "koa-body": "^4.1.0",
     "koa-compose": "^4.1.0",
     "koa-router": "^7.4.0",
-    "tslint": "^5.18.0",
+    "tslint": "^5.19.0",
     "typedi": "^0.8.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.2"
   }
 }
