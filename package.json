@@ -20,14 +20,14 @@
     "dist"
   ],
   "dependencies": {
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "@hapi/boom": "^7.4.2",
     "@types/hapi__boom": "^7.4.0",
     "@types/koa-compose": "^3.2.4",
     "@types/koa-router": "^7.0.42",
-    "@types/lodash": "^4.14.136",
+    "@types/lodash": "^4.14.138",
     "koa-body": "^4.1.0",
     "koa-compose": "^4.1.0",
     "koa-router": "^7.4.0",
