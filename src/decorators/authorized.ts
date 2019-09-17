@@ -4,6 +4,7 @@ import { getMeta } from '../lib/utils'
 
 export function authorized(): Function
 export function authorized(role: string): Function
+export function authorized(role: any): Function
 export function authorized(roles: string[]): Function
 export function authorized(fn: (user: any) => string): Function
 export function authorized(
@@ -16,10 +17,10 @@ export function authorized(
     roles = []
   } else if (Array.isArray(roleOrRoles)) {
     roles = roleOrRoles
-  } else if (typeof roleOrRoles === 'string') {
-    roles.push(roleOrRoles as string)
   } else if (typeof roleOrRoles === 'function') {
     fn = roleOrRoles
+  } else {
+    roles.push(roleOrRoles as string)
   }
 
   return (target: object | any, key: string) => {
