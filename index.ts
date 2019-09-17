@@ -61,7 +61,7 @@ export interface RouterConfig {
   /**
    * Get user role callback from user state
    */
-  getUserRoles?: (user: any) => string[]
+  getUserRoles?: (user: any) => any[]
 
   /**
    * Error handler callback
