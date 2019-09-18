@@ -6,15 +6,18 @@ export class AuthorizedMeta {
   roles: string[]
   authorize?: (user: any) => string
   method: string
+  errorMsg: string
 
   constructor(
     method: string,
     roles: string[],
+    errorMsg: string,
     authorize?: (user: any) => string
   ) {
     this.method = method
     this.roles = roles
     this.authorize = authorize
+    this.errorMsg = errorMsg
   }
 
   validate(context: RouterContext, config: RouterConfig) {
@@ -31,7 +34,7 @@ export class AuthorizedMeta {
 
       const userRoles = getUserRoles(user) || []
       if (!userRoles.some(role => this.roles.indexOf(role) > -1)) {
-        throw Boom.unauthorized('Insufficient access right.')
+        throw Boom.unauthorized(this.errorMsg)
       }
     }
 
