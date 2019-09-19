@@ -41,7 +41,8 @@ export class ActionMeta {
     return async (context, next) => {
       Object.assign(clazz, {
         context,
-        next
+        next,
+        user: context.state[config.userStateName || 'user']
       })
 
       // build method params
