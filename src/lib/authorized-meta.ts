@@ -34,7 +34,7 @@ export class AuthorizedMeta {
 
       const userRoles = getUserRoles(user) || []
       if (!userRoles.some(role => this.roles.indexOf(role) > -1)) {
-        throw Boom.unauthorized(this.errorMsg)
+        throw Boom.forbidden(this.errorMsg)
       }
     }
 
