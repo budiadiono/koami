@@ -1,7 +1,8 @@
 import { RouterContext } from 'koa-router'
-import { IParamMeta } from '../types'
+import { IParamMeta, IParamValidationMeta, ValidateType } from '../types'
+import { validateValue } from './utils'
 
-export class ParamMeta implements IParamMeta {
+export class ParamMeta implements IParamMeta, IParamValidationMeta {
   /**
    * name of method
    */
@@ -17,13 +18,24 @@ export class ParamMeta implements IParamMeta {
    */
   index: number
 
-  constructor(key: string, index: number, name: string) {
+  /**
+   * validation function/schema
+   */
+  validate?: ValidateType
+
+  constructor(
+    key: string,
+    index: number,
+    name: string,
+    validate?: ValidateType
+  ) {
     this.method = key
     this.index = index
     this.name = name
+    this.validate = validate
   }
 
   getValue(context: RouterContext) {
-    return context.params[this.name]
+    return validateValue(context.params[this.name], this.validate)
   }
 }

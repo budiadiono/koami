@@ -1,7 +1,9 @@
 import { RouterContext } from 'koa-router'
-import { IParamMeta } from '../types'
+import { IParamMeta, IParamValidationMeta, ValidateType } from '../types'
+import { validateValue } from './utils'
 
-export class QueryObjectMeta<T = any> implements IParamMeta {
+export class QueryObjectMeta<T = any>
+  implements IParamMeta, IParamValidationMeta {
   /**
    * name of method
    */
@@ -17,16 +19,27 @@ export class QueryObjectMeta<T = any> implements IParamMeta {
    */
   resolver?: (obj: any) => T
 
-  constructor(key: string, index: number, resolver?: (obj: any) => T) {
+  /**
+   * validation function/schema
+   */
+  validate?: ValidateType
+
+  constructor(
+    key: string,
+    index: number,
+    resolver?: (obj: any) => T,
+    validate?: ValidateType
+  ) {
     this.method = key
     this.index = index
     this.resolver = resolver
+    this.validate = validate
   }
 
   getValue(context: RouterContext) {
     if (this.resolver) {
-      return this.resolver(context.query)
+      return validateValue(this.resolver(context.query), this.validate)
     }
-    return context.query
+    return validateValue(context.query, this.validate)
   }
 }
