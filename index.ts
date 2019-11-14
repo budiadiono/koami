@@ -36,6 +36,11 @@ export function routing(args: any, ...controllers: Function[]): IMiddleware {
   config.base = base
 
   const router = new Router()
+
+  if (config.init) {
+    config.init(router)
+  }
+
   return compose([
     router
       .use(
@@ -57,6 +62,11 @@ export interface RouterConfig {
    * State name of user. Default is 'user'
    */
   userStateName?: string
+
+  /**
+   * Init callback. Called once Router instance initialized.
+   */
+  init?: (router: Router) => void
 
   /**
    * Get user role callback from user state

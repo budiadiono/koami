@@ -1,5 +1,7 @@
 import { IMiddleware } from 'koa-router'
+import send, { SendOptions } from 'koa-send'
 import _ from 'lodash'
+import path from 'path'
 import { RouterConfig } from '../..'
 import { HttpMethods, IParamMeta } from '../types'
 import { ControllerMeta } from './controller-meta'
@@ -8,10 +10,14 @@ export class ActionMeta {
   httpMethod: HttpMethods
   method: string
   route: string | RegExp
+  static?: boolean
+  staticOptions?: StaticSendOptions
 
   constructor(args: ActionMetaArgs) {
     this.httpMethod = args.httpMethod
     this.method = args.method
+    this.static = args.static
+    this.staticOptions = args.staticOptions
 
     let { route } = args
 
@@ -68,12 +74,22 @@ export class ActionMeta {
           authMeta.validate(context, config)
         }
 
+        if (this.static) {
+          return send(
+            context,
+            path.join(
+              (this.staticOptions && this.staticOptions.base) || '',
+              _.values(context.params).join('/')
+            )
+          )
+        }
+
         context.body = await clazz[this.method].apply(
           clazz,
           params.map(p => p.getValue(context, config))
         )
 
-        await next()
+        return await next()
       } catch (error) {
         const { onError } = config
 
@@ -93,4 +109,8 @@ export interface ActionMetaArgs {
   httpMethod: HttpMethods
   method: string
   route?: string | RegExp
+  static?: boolean
+  staticOptions?: StaticSendOptions
 }
+
+export type StaticSendOptions = SendOptions & { base?: string }

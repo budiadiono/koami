@@ -33,6 +33,7 @@
     "koa-body": "^4.1.1",
     "koa-compose": "^4.1.0",
     "koa-router": "^7.4.0",
+    "koa-send": "^5.0.0",
     "tslint": "^5.19.0",
     "typedi": "^0.8.0",
     "typescript": "^3.6.2"
