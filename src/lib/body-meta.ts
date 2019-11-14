@@ -25,6 +25,10 @@ export class BodyMeta implements IParamMeta, IParamValidationMeta {
   }
 
   getValue(context: RouterContext) {
-    return validateValue(context.request.body, this.validate)
+    let data = context.request.body
+    if (context.request.files) {
+      data = { ...data, ...context.request.files }
+    }
+    return validateValue(data, this.validate)
   }
 }
