@@ -41,15 +41,16 @@ export class ActionMeta {
 
   createMiddleware(
     meta: ControllerMeta,
-    clazz: Function,
+    Clazz: FunctionConstructor,
     config: RouterConfig
   ): IMiddleware {
     return async (context, next) => {
-      Object.assign(clazz, {
+      Object.assign(Clazz.prototype, {
         context,
         next,
         user: context.state[config.userStateName || 'user']
       })
+      const clazz = new Clazz()
 
       // build method params
       const params: IParamMeta[] = _([

@@ -75,12 +75,11 @@ export class ControllerMeta {
    */
   routes(config: RouterConfig): IMiddleware {
     const router = new Router()
-    const clazz = new this.target()
 
     for (const a of this.actions) {
       router[a.httpMethod](
         a.route,
-        compose<RouterContext>([a.createMiddleware(this, clazz, config)])
+        compose<RouterContext>([a.createMiddleware(this, this.target, config)])
       )
     }
 
