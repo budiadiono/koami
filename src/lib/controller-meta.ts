@@ -10,8 +10,8 @@ import { QueryObjectMeta } from './query-object-meta'
 import { UserMeta } from './user-meta'
 
 export class ControllerMeta {
-  private target: FunctionConstructor
-  private route: string | RegExp
+  private target: Function
+  private route?: string | RegExp
 
   /**
    * Controller actions
@@ -51,11 +51,11 @@ export class ControllerMeta {
   /**
    * Set controller target
    * @param target controller class
-   * @param route base route
    */
-  setTarget(target: FunctionConstructor, route?: string | RegExp) {
-    this.target = target
+  private setTarget(target: Function) {
+    let { route } = target.prototype
 
+    this.target = target
     if (!route) {
       // build route from controller class name
       // and remove constructor suffix
@@ -73,16 +73,19 @@ export class ControllerMeta {
   /**
    * Build routes middleware for this controller
    */
-  routes(config: RouterConfig): IMiddleware {
+  routes(target: Function, config: RouterConfig): IMiddleware {
     const router = new Router()
+    this.setTarget(target)
 
     for (const a of this.actions) {
       router[a.httpMethod](
         a.route,
-        compose<RouterContext>([a.createMiddleware(this, this.target, config)])
+        compose<RouterContext>([
+          a.createMiddleware(this, this.target as FunctionConstructor, config)
+        ])
       )
     }
 
-    return new Router().use(this.route, router.routes()).routes()
+    return new Router().use(this.route!, router.routes()).routes()
   }
 }

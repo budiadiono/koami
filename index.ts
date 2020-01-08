@@ -1,6 +1,7 @@
 import compose from 'koa-compose'
 import Router, { IMiddleware, RouterContext } from 'koa-router'
 import { getMeta } from './src/lib/utils'
+import _ from 'lodash'
 
 export * from './src/base/controller-base'
 export * from './src/decorators/actions'
@@ -45,7 +46,7 @@ export function routing(args: any, ...controllers: Function[]): IMiddleware {
     router
       .use(
         base,
-        ...controllers.map(ctrl => getMeta(ctrl.prototype).routes(config))
+        ...controllers.map(ctrl => getMeta(ctrl.prototype).routes(ctrl, config))
       )
       .routes(),
     router.allowedMethods()
