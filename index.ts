@@ -1,16 +1,15 @@
 import compose from 'koa-compose'
 import Router, { IMiddleware, RouterContext } from 'koa-router'
 import { getMeta } from './src/lib/utils'
-import _ from 'lodash'
 
 export * from './src/base/controller-base'
 export * from './src/decorators/actions'
+export * from './src/decorators/authorized'
 export * from './src/decorators/body'
 export * from './src/decorators/controller'
 export * from './src/decorators/param'
-export * from './src/decorators/user'
-export * from './src/decorators/authorized'
 export * from './src/decorators/query-object'
+export * from './src/decorators/user'
 
 export function routing(
   config: RouterConfig,
@@ -65,6 +64,11 @@ export interface RouterConfig {
   userStateName?: string
 
   /**
+   * Ioc Container
+   */
+  container?: IocContainer
+
+  /**
    * Init callback. Called once Router instance initialized.
    */
   init?: (router: Router) => void
@@ -78,4 +82,9 @@ export interface RouterConfig {
    * Error handler callback
    */
   onError?: (error: any, context: RouterContext) => void
+}
+
+export interface IocContainer {
+  get(identifier: any): any
+  resolve(identifier: any): any
 }

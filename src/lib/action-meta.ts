@@ -50,7 +50,9 @@ export class ActionMeta {
         next,
         user: context.state[config.userStateName || 'user']
       })
-      const clazz = new Clazz()
+      const clazz = config.container
+        ? config.container.resolve(Clazz)
+        : new Clazz()
 
       // build method params
       const params: IParamMeta[] = _([
