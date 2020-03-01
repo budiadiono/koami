@@ -10,6 +10,7 @@
   "license": "MIT",
   "author": "budiadiono <budiadiono@gmail.com>",
   "main": "./dist/index.js",
+  "local:main": "./index.ts",
   "files": [
     "dist"
   ],

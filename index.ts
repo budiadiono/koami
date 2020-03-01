@@ -45,7 +45,9 @@ export function routing(args: any, ...controllers: Function[]): IMiddleware {
     router
       .use(
         base,
-        ...controllers.map(ctrl => getMeta(ctrl.prototype).routes(ctrl, config))
+        ...controllers
+          .filter(c => typeof c === 'function')
+          .map(ctrl => getMeta(ctrl.prototype).routes(ctrl, config))
       )
       .routes(),
     router.allowedMethods()
