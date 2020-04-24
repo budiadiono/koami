@@ -16,7 +16,8 @@
   ],
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "release": "standard-version"
+    "release": "standard-version",
+    "prepublishOnly": "yarn build"
   },
   "dependencies": {
     "lodash": "^4.17.11",
@@ -29,6 +30,8 @@
     "@types/koa-router": "^7.0.42",
     "@types/lodash": "^4.14.138",
     "@types/yup": "^0.26.24",
+    "commitizen": "^4.0.4",
+    "cz-conventional-changelog": "^3.1.0",
     "koa-body": "^4.1.1",
     "koa-compose": "^4.1.0",
     "koa-router": "^7.4.0",
@@ -40,5 +43,10 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
